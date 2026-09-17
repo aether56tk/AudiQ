@@ -2,34 +2,55 @@
 
 This folder contains the reproducible computer-vision training pipeline for AudiQ.
 
-## Tonight's baseline
+## Current goal
 
-The first task is **audiogram symbol detection**, not autonomous clinical interpretation.
+The first model is **audiogram visual-symbol detection**, not autonomous clinical interpretation.
 
-Target classes for the initial dataset:
+Target classes:
 
 1. `RIGHT_AC_O`
 2. `LEFT_AC_X`
 3. `BC`
 4. `OTHER`
 
-The pipeline is designed to work with YOLO-compatible datasets and can be run locally or in Kaggle/Colab.
+## What is already built
 
-## Research baselines to inspect
+- `ANNOTATION_STUDIO.html` — browser annotation tool for O/X/BC/other marks.
+- `ANNOTATION_SCHEMA.md` — master JSON annotation contract.
+- `generate_synthetic_dataset.py` — creates legally self-contained synthetic audiograms with exact ground truth.
+- `convert_annotations.py` — converts verified master JSON to YOLO labels.
+- `prepare_dataset.py` / `validate_dataset.py` — dataset checks.
+- `AudiQ_AI_Training_v0_1.ipynb` — Kaggle/Colab training starter.
+- `train.py` / `predict.py` — training and inference entry points.
 
-- GreenCUBIC AudiogramDigitization: https://github.com/GreenCUBIC/AudiogramDigitization
-- MAIN2021: https://github.com/jacklishufan/MAIN2021
-- AutoAudiogram: https://github.com/biodatlab/autoaudiogram
-- SyntHH: https://github.com/evidENT-AI/SyntHH
+## First experiment: synthetic baseline
 
-These projects are references/baselines. Their code and datasets have different licenses and access conditions; do not copy restricted datasets into this repository without permission.
+When a public/permissioned real dataset is unavailable, start with synthetic data to verify the entire pipeline:
+
+```bash
+python ai/generate_synthetic_dataset.py --out synthetic_audiograms --count 200
+python ai/convert_annotations.py --annotations synthetic_audiograms/annotations/master.json --images-root synthetic_audiograms/images --output dataset --copy
+python ai/prepare_dataset.py --root dataset
+```
+
+Then train in Kaggle/Colab using `ai/AudiQ_AI_Training_v0_1.ipynb`.
+
+Synthetic training is a **pipeline/engineering baseline only**. It must not be presented as clinical validation because synthetic charts do not represent the full variation of real audiograms, scanning, printing, handwriting, symbols, or clinical records.
+
+## Test policy
+
+The five seed audiograms supplied for the first AudiQ experiment are held out from training and validation. They are for final pipeline testing after a model has been trained on independent data.
 
 ## Data policy
 
-Only use de-identified data for development. Do not commit patient images, clinical identifiers, or restricted research datasets to this public repository.
+Only use de-identified data for development. Do not commit patient images, clinical identifiers, restricted research datasets, or third-party weights without permission to this public repository.
 
 ## Pipeline
 
-`images -> annotation -> YOLO dataset -> training -> validation -> test -> threshold extraction -> human verification`
+`image -> chart/symbol detection -> coordinates -> frequency/dB mapping -> confidence -> human verification -> clinical calculations`
 
 Clinical calculations remain outside the model and must use verified thresholds.
+
+## Safety boundary
+
+AudiQ AI is an experimental research/engineering component. It does not independently establish hearing-loss diagnosis, masking requirements, SRT, or clinical management. Model outputs require human verification before clinical calculations or reporting.
