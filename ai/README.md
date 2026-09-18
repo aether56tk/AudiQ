@@ -23,7 +23,7 @@ Target classes:
 - `AudiQ_AI_Training_v0_1.ipynb` — Kaggle/Colab training starter.
 - `train.py` / `predict.py` — training and inference entry points.
 
-## First experiment: synthetic baseline
+## Dataset reality check\n\nThe MAIN2021 repository references an external Open Audiogram Dataset package, but the dataset is not stored in the AudiQ repository and may require separate access. Do not block the engineering pipeline on that package. AudiQ can proceed with its self-generated synthetic dataset while access/licensing for real datasets is resolved.\n\n`DATA_SOURCES.md` records the current status and licensing checkpoints.\n\n## First experiment: synthetic baseline
 
 When a public/permissioned real dataset is unavailable, start with synthetic data to verify the entire pipeline:
 
@@ -45,7 +45,7 @@ The five seed audiograms supplied for the first AudiQ experiment are held out fr
 
 Only use de-identified data for development. Do not commit patient images, clinical identifiers, restricted research datasets, or third-party weights without permission to this public repository.
 
-## Pipeline
+## Integration layer\n\n- `adapters/greencubic_adapter.py` normalizes compatible third-party digitizer JSON into AudiQ's prediction schema without inventing missing clinical fields.\n- `evaluation/threshold_metrics.py` measures matched-point threshold error and ±5/±10 dB accuracy against verified ground truth.\n\nThe adapter is deliberately tolerant because third-party output formats can differ; inspect and verify imported fields before clinical use.\n\n## Pipeline
 
 `image -> chart/symbol detection -> coordinates -> frequency/dB mapping -> confidence -> human verification -> clinical calculations`
 
