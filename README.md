@@ -1,48 +1,67 @@
-# Audiometry Clinical Utility
+# AudiQ
 
-A practical web-based audiometry utility for **BASLP students and clinical trainees** to organize routine pure-tone and speech-audiometry documentation.
+**AudiQ is an educational audiometry workflow and learning utility for BASLP students and supervised clinical training.**
 
-## Features
+## Current workflow
 
-- Patient and examination details
-- Right/left **air-conduction (AC)** and **bone-conduction (BC)** threshold entry
-- PTA calculation using 500, 1000 and 2000 Hz AC thresholds
+- Manual AC/BC threshold entry
+- 3-frequency PTA calculation (500, 1000 and 2000 Hz)
 - Audiogram visualization
-- Automatic masking-assistance calculations and warnings
-- Masking plateau tracking
-- Speech audiometry fields: SDT, SRT/related documentation, SIS/WRS, MCL and UCL
-- Clinical case summary and notes
-- Print-friendly clinical report / PDF through the browser print dialog
-- Responsive interface for mobile and desktop
+- Speech-audiometry documentation fields
+- Masking decision-support screen
+- Audiogram-photo candidate extraction
+- Mandatory human verification before analysis/reporting
+- Print/save-to-PDF workflow
+- Responsive browser interface
 
-## Purpose
+## Safety boundary
 
-This project is an **educational and clinical documentation utility**. It is not a replacement for calibrated audiometric equipment, institutional protocols, or professional clinical judgement.
+AudiQ is **not calibrated audiometric equipment and is not an autonomous diagnostic system**.
 
-Masking calculations are decision support and should be checked against the procedure and protocol used by the supervising clinician or institution.
+Photo extraction produces threshold **candidates** that must be reviewed against the original audiogram. Masking output is decision support and must be checked against the transducer, interaural attenuation, occlusion effects, masked bone-conduction information and the protocol used by the supervising clinician.
+
+Do not enter identifiable patient information into the public deployment or repository.
+
+## Engineering status
+
+### Complete software work
+
+- Single production entry point
+- Candidate extraction with explicit verification gate
+- Clinical calculation/report workflow
+- Privacy and safety messaging
+- GitHub Pages deployment
+- Repository cleanup and documentation
+
+### Validation is the remaining research item
+
+Clinical/research validation of photo extraction and decision-support behavior remains pending.
+
+Before any accuracy or diagnostic-performance claim:
+
+1. Define a governed, de-identified test set.
+2. Establish expert reference values.
+3. Freeze the software version.
+4. Compare extracted thresholds with reference thresholds.
+5. Report error distributions and failure cases.
+6. Evaluate masking guidance against the applicable institutional/professional procedure.
+
+Software tests alone do not establish clinical validity.
 
 ## Technology
 
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- HTML Canvas
-- No backend required
-- No database required
-
-## Privacy
-
-Do not enter identifiable patient information into a public deployment. Use synthetic or de-identified data for demonstrations and follow institutional privacy, consent, retention and information-security requirements in clinical settings.
-
-## Status
-
-**Active educational prototype** — continued refinement is planned for calculation transparency, clinical workflow and reporting.
+- Canvas
+- OpenCV.js for experimental image processing
+- GitHub Pages
+- No application backend
 
 ## Author
 
-**Adithyan Tk**  
-BASLP Student | Clinical Technology & HealthTech Projects
+**Adithyan Tk** — BASLP Student | Clinical Technology & HealthTech Projects
 
 ## License
 
-MIT License
+MIT
