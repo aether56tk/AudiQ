@@ -1,3 +1,5 @@
+![Quality](https://github.com/aether56tk/AudiQ/actions/workflows/quality.yml/badge.svg)
+
 # AudiQ
 
 **AudiQ is an educational audiometry workflow and learning utility for BASLP students and supervised clinical training.**
