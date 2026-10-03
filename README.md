@@ -58,6 +58,13 @@ Software tests alone do not establish clinical validity.
 - GitHub Pages
 - No application backend
 
+## Project files
+
+- [Security policy](SECURITY.md)
+- [Contributing guide](CONTRIBUTING.md)
+- [Validation status](VALIDATION_STATUS.md)
+- [Citation metadata](CITATION.cff)
+
 ## Author
 
 **Adithyan Tk** — BASLP Student | Clinical Technology & HealthTech Projects
