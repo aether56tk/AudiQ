@@ -1,0 +1,12 @@
+# AudiQ AI v0.1 — YOLO dataset template
+# Put the dataset root in the `path` field when training.
+path: ./dataset
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: RIGHT_AC_O
+  1: LEFT_AC_X
+  2: BC
+  3: OTHER
